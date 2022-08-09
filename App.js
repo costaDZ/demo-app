@@ -9,7 +9,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View, Button, TextInput} from 'react-native';
 
-import {PESDK, Configuration} from 'react-native-photoeditorsdk';
+import {PESDK} from 'react-native-photoeditorsdk';
 
 /**
  * Uncomment the following single line of code to unlock PhotoEditor SDK automatically
@@ -23,47 +23,8 @@ const App = () => {
   const openEditor = () => {
     // Set up sample image
     let image = require('./assets/LA.jpg');
-    // Set up configuration
-    let configuration: Configuration = {
-      // Configure sticker tool
-      sticker: {
-        // Enable personal stickers
-        personalStickers: true,
-        // Configure sticker library
-        categories: [
-          // Create sticker category with stickers
-          {
-            identifier: 'example_sticker_category_logos',
-            name: 'Logos',
-            thumbnailURI: require('./assets/React.png'),
-            items: [
-              {
-                identifier: 'example_sticker_logos_react',
-                name: 'React',
-                stickerURI: require('./assets/React.png'),
-              },
-              {
-                identifier: 'example_sticker_logos_imgly',
-                name: 'IMG.LY',
-                stickerURI: require('./assets/Igor.png'),
-              },
-            ],
-          },
-          // Use existing sticker category
-          {identifier: 'imgly_sticker_category_emoticons'},
-          // Modify existing sticker category
-          {
-            identifier: 'imgly_sticker_category_shapes',
-            items: [
-              {identifier: 'imgly_sticker_shapes_badge_01'},
-              {identifier: 'imgly_sticker_shapes_arrow_02'},
-              {identifier: 'imgly_sticker_shapes_spray_03'},
-            ],
-          },
-        ],
-      },
-    };
-    PESDK.openEditor(image, configuration).then(
+
+    PESDK.openEditor(image).then(
       result => {
         console.log(result);
       },
@@ -78,35 +39,17 @@ const App = () => {
       style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <View title="PhotoEditor SDK">
         <Button onPress={openEditor} title="opne Editor" />
-        {/* <TextInput
+        {/* 🔴🔴 When i use text input it crashes the app when i comment the text input it works 🔴🔴*/}
+        <TextInput
           style={{backgroundColor: 'white', height: 40, width: 200}}
           placeholder="Enter text"
           onChangeText={text => {
             console.log(text);
           }}
-        /> */}
+        />
       </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

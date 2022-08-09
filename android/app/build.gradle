@@ -5,6 +5,12 @@ apply plugin: 'kotlin-android'
 
 // Comment out the modules you don't need, to save size.
 imglyConfig {
+
+    pesdk {
+        enabled true
+        licensePath null // set `null` for free trial
+    }
+
     modules {
         include 'ui:text'
         include 'ui:focus'
@@ -248,6 +254,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    
 }
 
 // Run this once to be able to run the application with BUCK
